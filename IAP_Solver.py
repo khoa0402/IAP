@@ -391,7 +391,7 @@ def run_performance_benchmark(I, J, demand, overlapping_shifts, availability, ma
 # CHẠY CHƯƠNG TRÌNH CHÍNH
 # =====================================================================
 if __name__ == "__main__":
-    # ĐIỀN TÊN FILE CSV CỦA BẠN VÀO ĐÂY (nhớ để cùng thư mục với file Python)
+    # FILE CSV Ở ĐÂY (cùng thư mục với file Python)
     csv_path = "Dataset_Anonymized_Invigilator_Assignment_Problem.xlsx"
 
     print("="*60)
