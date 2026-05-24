@@ -25,7 +25,7 @@ def preprocess_real_data(csv_file_path):
     
     print("Các cột có trong file dữ liệu của bạn là:", df.columns.tolist())
     
-    # ⚠️ BẠN CẦN SỬA CÁC TÊN CỘT NÀY SAU KHI XEM DÒNG PRINT Ở TRÊN ⚠️
+
     COL_STAFF = 'MS của CÁN BỘ COI THI'  # Mã cán bộ
     COL_SHIFT = 'MS Ca thi'               # Mã ca thi
     COL_CAMPUS = 'Cơ sở'                  # Cơ sở
