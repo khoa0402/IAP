@@ -44,4 +44,4 @@ pip install pandas pulp numpy openpyxl
 python IAP_Solver.py
 ```
 
-### 5. Lưu ý để code chạy hiệu quả nên chạy 2 lần cho lần đầu chạy code
+Lưu ý để code chạy hiệu quả nên chạy 2 lần cho lần đầu chạy code
