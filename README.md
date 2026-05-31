@@ -35,7 +35,11 @@ Mở Terminal / Command Prompt tại thư mục chứa dự án và chạy lện
 ```powershell
 pip install pandas pulp numpy openpyxl
 ```
+Kích hoạt venv lên rồi chạy lệnh sau ở Terminal:
 
+```powershell
+pip install -r requirements.txt
+```
 ### 4. Khởi chạy chương trình
 
 Đảm bảo file dữ liệu Excel Dataset_Anonymized_Invigilator_Assignment_Problem.xlsx đã nằm chung thư mục với file code. Tiến hành chạy chương trình bằng lệnh:
