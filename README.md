@@ -1,51 +1,103 @@
-# 📅 Hệ Thống Giải Toán Tối Ưu Phân Công Giám Thị (IAP Solver)
+# IAP Solver — Hệ Thống Giải Toán Phân Công Giám Thị
 
-Dự án này triển khai mô hình Quy hoạch Tuyến tính Nguyên(ILP - Integer Linear Programming) giải quyết bài toán **Invigilator Assignment Problem (IAP)**. Hệ thống tự động hóa quá trình phân bổ cán bộ coi thi vào các ca thi dựa trên dữ liệu thực tế, cân đối giữa nguyện vọng địa lý (Cơ sở làm việc) và tính công bằng về khối lượng công việc (Workload Fairness).
+Hệ thống tối ưu hóa phân công giám thị coi thi (Invigilator Assignment Problem) sử dụng mô hình **Integer Linear Programming (ILP)** với bộ giải PuLP/CBC.
 
----
+## Yêu Cầu Hệ Thống
 
-## 🚀 Tính Năng Chính Của Hệ Thống
+- **Python**: `3.12.x` (khuyến nghị 3.12.8 — phiên bản phát triển gốc)
+- **Hệ điều hành**: Windows 10/11, macOS, hoặc Linux
 
-- **Tiền xử lý dữ liệu thực tế (`preprocess_real_data`):** Tự động đọc file cấu trúc Excel, nhận diện danh sách cán bộ, ca thi, tính toán nhu cầu nhân lực (`demand`) và lọc các cặp ca bị trùng lịch thi.
-- **Mô hình tối ưu hóa toán học (`solve_iap_model`):** Định biên tối ưu sử dụng thư viện `PuLP` và bộ giải `CBC` mã nguồn mở.
-- **Phân tích đa mục tiêu & Nới lỏng ràng buộc (`run_tuning_and_relaxation`):** Khảo sát biên Pareto thông qua Grid Search với 3 kịch bản trọng số khác nhau. Tích hợp biến lỏng (Slack Variables) và phạt Big-M chống trạng thái vô nghiệm (Infeasible).
-- **Đánh giá hiệu năng hệ thống (`run_performance_benchmark`):** So sánh đối sánh định lượng các chỉ số thống kê (Max/Min tải, độ lệch chuẩn, chi phí di chuyển) giữa phương án tối ưu ILP và lịch lịch phân công thủ công ban đầu (Baseline).
+## Hướng Dẫn Cài Đặt & Chạy Code
 
----
+### Bước 1: Tải project về
 
-## 🛠️ Yêu Cầu Hệ Thống & Cài Đặt
+```bash
+git clone <repository-url>
+cd MHH
+```
 
-### 1. Yêu cầu môi trường
+### Bước 2: Tạo Virtual Environment
 
-- **Python**: Phiên bản `3.10` trở lên.
-- **Hệ điều hành**: Windows, macOS hoặc Linux.
-
-### 2: Kích hoạt môi trường ảo (Virtual Environment)
-
-Để đảm bảo chương trình chạy với đầy đủ các thư viện đã cài đặt sẵn trong môi trường ảo `venv`, hãy mở Terminal / Command Prompt tại thư mục chứa dự án và gõ lệnh kích hoạt:
-
+**Windows (PowerShell):**
 ```powershell
+python -m venv venv
 .\venv\Scripts\Activate.ps1
 ```
 
-### 3. Cài đặt các thư viện phụ thuộc
-
-Mở Terminal / Command Prompt tại thư mục chứa dự án và chạy lệnh sau để cài đặt các gói thư viện cần thiết:
-
-```powershell
-pip install pandas pulp numpy openpyxl
+**Windows (Command Prompt):**
+```cmd
+python -m venv venv
+.\venv\Scripts\activate.bat
 ```
-Kích hoạt venv lên rồi chạy lệnh sau ở Terminal:
 
-```powershell
+**macOS / Linux:**
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+>  **Lưu ý PowerShell**: Nếu gặp lỗi "cannot be loaded because running scripts is disabled", chạy lệnh sau với quyền **Administrator**:
+> ```powershell
+> Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+> ```
+
+### Bước 3: Cài đặt thư viện
+
+```bash
 pip install -r requirements.txt
 ```
-### 4. Khởi chạy chương trình
 
-Đảm bảo file dữ liệu Excel Dataset_Anonymized_Invigilator_Assignment_Problem.xlsx đã nằm chung thư mục với file code. Tiến hành chạy chương trình bằng lệnh:
+### Bước 4: Chạy chương trình
 
-```powershell
+```bash
 python IAP_Solver.py
 ```
 
-Lưu ý để code chạy hiệu quả nên chạy 2 lần cho lần đầu chạy code
+> **Quan trọng**: File dữ liệu `Dataset_Anonymized_Invigilator_Assignment_Problem.xlsx` phải nằm **cùng thư mục** với `IAP_Solver.py`.
+
+## Thư Viện Sử Dụng
+
+| Thư viện | Phiên bản | Mô tả |
+|----------|-----------|-------|
+| `pandas` | 3.0.3 | Đọc & xử lý dữ liệu Excel |
+| `numpy` | 2.4.6 | Tính toán thống kê |
+| `pulp` | 3.3.1 | Bộ giải quy hoạch tuyến tính nguyên (ILP) |
+| `openpyxl` | 3.1.5 | Engine đọc file .xlsx cho pandas |
+
+## Cấu Trúc Project
+
+```
+MHH/
+├── IAP_Solver.py            # File chính — chạy toàn bộ hệ thống
+├── Dataset_Anonymized_...   # File dữ liệu đầu vào (.xlsx)
+├── requirements.txt         # Danh sách thư viện cần cài
+├── .gitignore               # Bỏ qua venv, cache khi push git
+└── README.md                # File hướng dẫn này
+```
+
+## Xử Lý Sự Cố Thường Gặp
+
+### Lỗi `ModuleNotFoundError`
+Đảm bảo bạn đã kích hoạt venv trước khi chạy:
+```bash
+# Kiểm tra đang dùng Python nào
+python --version
+pip list
+```
+
+### Lỗi encoding tiếng Việt
+Code đã xử lý tự động cho Windows. Nếu vẫn gặp lỗi, chạy với:
+```bash
+python -X utf8 IAP_Solver.py
+```
+
+### Lỗi đọc file Excel
+- Kiểm tra tên file chính xác: `Dataset_Anonymized_Invigilator_Assignment_Problem.xlsx`
+- Đảm bảo file nằm cùng thư mục với `IAP_Solver.py`
+- Thử chạy `pip install openpyxl` riêng nếu pandas báo lỗi engine
+
+## Chức Năng Chính
+
+1. **Requirement 7**: Giải mô hình ILP gốc — phân công tối ưu với ràng buộc trùng ca, vượt tải, sở thích cơ sở
+2. **Requirement 8**: Weight Tuning & Relaxation — khảo sát trọng số Alpha/Beta trên biên Pareto + tự động nới lỏng khi Infeasible
+3. **Requirement 9**: Performance Benchmark — so sánh định lượng lịch thủ công (Baseline) vs mô hình ILP tối ưu
