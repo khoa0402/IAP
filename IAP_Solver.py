@@ -254,11 +254,11 @@ def run_tuning_and_relaxation(I, J, demand, overlapping_shifts, availability, ma
             })
             print(f"    Trạng thái nghiệm: THÀNH CÔNG (Optimal)")
             if total_s > 0 or total_d > 0:
-                print(f"    ⚠️ [CẢNH BÁO NỚI LỎNG]: Mô hình gốc bị Infeasible! Hệ thống đã tự động kích hoạt Chiến lược 1:")
+                print(f"    [CẢNH BÁO NỚI LỎNG]: Mô hình gốc bị Infeasible! Hệ thống đã tự động kích hoạt Chiến lược 1:")
                 if total_d > 0: print(f"       + Thiếu hụt tổng cộng: {total_d} lượt giám thị tại các ca thi.")
                 if total_s > 0: print(f"       + Ép buộc vượt ngưỡng tối đa: {total_s} ca đối với một số cán bộ.")
             else:
-                print(f"    ✅ Mô hình đạt độ khả thi tuyệt đối nguyên bản (Không cần nới lỏng).")
+                print(f"    Mô hình đạt độ khả thi tuyệt đối nguyên bản (Không cần nới lỏng).")
 
             print(f"    Kết quả: Total Geo-Penalty = {total_penalty:.1f} | Workload Gap = {unfairness_gap} ca (Max: {final_w_max}, Min: {final_w_min})")
         else:
@@ -383,9 +383,9 @@ def run_performance_benchmark(I, J, demand, overlapping_shifts, availability, ma
     total_s = sum(pulp.value(s[i]) for i in I)
     total_d = sum(pulp.value(d[j]) for j in J)
     if total_s > 0 or total_d > 0:
-        print(f"⚠️ [LƯU Ý VẬN HÀNH]: Nghiệm tối ưu trên có chứa vi phạm nới lỏng (Thiếu người: {total_d}, Quá tải: {total_s}).")
+        print(f"[LƯU Ý VẬN HÀNH]: Nghiệm tối ưu trên có chứa vi phạm nới lỏng (Thiếu người: {total_d}, Quá tải: {total_s}).")
     else:
-        print("✅ Đánh giá hiệu năng hoàn tất! Đạt trạng thái tối ưu hóa toàn cục nguyên bản.\n")
+        print("Đánh giá hiệu năng hoàn tất! Đạt trạng thái tối ưu hóa toàn cục nguyên bản.\n")
 
 # =====================================================================
 # CHẠY CHƯƠNG TRÌNH CHÍNH
